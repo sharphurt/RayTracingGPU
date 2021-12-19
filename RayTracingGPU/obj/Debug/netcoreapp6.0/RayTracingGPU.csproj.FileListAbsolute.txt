@@ -1,0 +1,15 @@
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\netcoreapp6.0\RayTracingGPU.csproj.AssemblyReference.cache
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\netcoreapp6.0\RayTracingGPU.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\netcoreapp6.0\RayTracingGPU.AssemblyInfoInputs.cache
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\netcoreapp6.0\RayTracingGPU.AssemblyInfo.cs
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\netcoreapp6.0\RayTracingGPU.csproj.CoreCompileInputs.cache
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\bin\Debug\netcoreapp6.0\RayTracingGPU.exe
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\bin\Debug\netcoreapp6.0\RayTracingGPU.deps.json
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\bin\Debug\netcoreapp6.0\RayTracingGPU.runtimeconfig.json
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\bin\Debug\netcoreapp6.0\RayTracingGPU.dll
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\bin\Debug\netcoreapp6.0\ref\RayTracingGPU.dll
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\bin\Debug\netcoreapp6.0\RayTracingGPU.pdb
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\netcoreapp6.0\RayTracingGPU.dll
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\netcoreapp6.0\ref\RayTracingGPU.dll
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\netcoreapp6.0\RayTracingGPU.pdb
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\netcoreapp6.0\RayTracingGPU.genruntimeconfig.cache

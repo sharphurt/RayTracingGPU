@@ -1,0 +1,6 @@
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\net48\RayTracingGPU.csproj.AssemblyReference.cache
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\net48\RayTracingGPU.csproj.SuggestedBindingRedirects.cache
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\net48\RayTracingGPU.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\net48\RayTracingGPU.AssemblyInfoInputs.cache
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\net48\RayTracingGPU.AssemblyInfo.cs
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Debug\net48\RayTracingGPU.csproj.CoreCompileInputs.cache

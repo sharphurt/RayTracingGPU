@@ -1,0 +1,17 @@
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\bin\Release\netcoreapp6.0\Assets\Fonts\gilroy-regular.ttf
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\bin\Release\netcoreapp6.0\Assets\Textures\chess.jpg
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\bin\Release\netcoreapp6.0\Shaders\postprocess.glsl
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\bin\Release\netcoreapp6.0\Shaders\raytracing.glsl
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\bin\Release\netcoreapp6.0\Shaders\raytracing2.glsl
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\bin\Release\netcoreapp6.0\ImprovedRayTracing.deps.json
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\bin\Release\netcoreapp6.0\ImprovedRayTracing.dll
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\bin\Release\netcoreapp6.0\ref\ImprovedRayTracing.dll
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\bin\Release\netcoreapp6.0\ImprovedRayTracing.pdb
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\obj\Release\netcoreapp6.0\ImprovedRayTracing.csproj.AssemblyReference.cache
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\obj\Release\netcoreapp6.0\ImprovedRayTracing.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\obj\Release\netcoreapp6.0\ImprovedRayTracing.AssemblyInfoInputs.cache
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\obj\Release\netcoreapp6.0\ImprovedRayTracing.AssemblyInfo.cs
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\obj\Release\netcoreapp6.0\ImprovedRayTracing.csproj.CoreCompileInputs.cache
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\obj\Release\netcoreapp6.0\ImprovedRayTracing.dll
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\obj\Release\netcoreapp6.0\ref\ImprovedRayTracing.dll
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\ImprovedRayTracing\obj\Release\netcoreapp6.0\ImprovedRayTracing.pdb

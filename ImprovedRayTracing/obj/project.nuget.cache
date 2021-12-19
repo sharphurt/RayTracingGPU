@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "Dd/iIMp6jHU4hloh2Z8fuk4Ro+6CTp1KpYEhzwYRcRU9T6i41vTRloAM7TMbQ0PBpoVRsVKJXJYpj0n4YwhbCQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\sharphurt\\RiderProjects\\RayTracingGPU\\ImprovedRayTracing\\ImprovedRayTracing.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sharphurt\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
+    "C:\\Users\\sharphurt\\.nuget\\packages\\sfml.audio\\2.5.0\\sfml.audio.2.5.0.nupkg.sha512",
+    "C:\\Users\\sharphurt\\.nuget\\packages\\sfml.graphics\\2.5.0\\sfml.graphics.2.5.0.nupkg.sha512",
+    "C:\\Users\\sharphurt\\.nuget\\packages\\sfml.net\\2.5.0\\sfml.net.2.5.0.nupkg.sha512",
+    "C:\\Users\\sharphurt\\.nuget\\packages\\sfml.system\\2.5.0\\sfml.system.2.5.0.nupkg.sha512",
+    "C:\\Users\\sharphurt\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
