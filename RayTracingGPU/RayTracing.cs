@@ -23,7 +23,7 @@ namespace RayTracingGPU
         public float Speed { get; } = 0.05f;
         public bool ShowCursor { get; set; }
 
-        public Vector3f Position;
+        public Vector3f Position = new Vector3f(0, 0, -2);
 
         private FirstPersonCamera _camera = new FirstPersonCamera();
 
@@ -89,16 +89,6 @@ namespace RayTracingGPU
             }
 
             _window.GainedFocus += (sender, args) => _accumulatedFrames = 1;
-            _window.MouseButtonPressed += OnMouseButtonPressed;
-        }
-
-        private void OnMouseButtonPressed(object? sender, MouseButtonEventArgs e)
-        {
-            if (ShowCursor)
-                _accumulatedFrames = 1;
-
-            _window.SetMouseCursorVisible(false);
-            ShowCursor = false;
         }
 
         private void OnMouseMoved()

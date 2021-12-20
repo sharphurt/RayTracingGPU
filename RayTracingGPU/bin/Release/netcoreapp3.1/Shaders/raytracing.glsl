@@ -13,7 +13,7 @@ uniform vec2 u_seed2;
 uniform sampler2D u_chess_texture;
 
 const float MAX_DIST = 99999.0;
-const int MAX_REF = 8;
+const int MAX_REF = 16;
 vec3 light = normalize(vec3(-0.5, 0.75, -1.0));
 
 uvec4 R_STATE;
@@ -87,13 +87,33 @@ vec2 boxIntersection(in vec3 ro, in vec3 rd, in vec3 rad, out vec3 oN)  {
 	vec3 t2 = -n + k;
 	float tN = max(max(t1.x, t1.y), t1.z);
 	float tF = min(min(t2.x, t2.y), t2.z);
-	if(tN > tF || tF < 0.0) return vec2(-1.0);
+	
+	if(tN > tF || tF < 0.0)
+	 return vec2(-1.0);
+	 	 
 	oN = -sign(rd) * step(t1.yzx, t1.xyz) * step(t1.zxy, t1.xyz);
 	return vec2(tN, tF);
 }
 
 float plaIntersect(in vec3 ro, in vec3 rd, in vec4 p) {
 	return -(dot(ro, p.xyz) + p.w) / dot(rd, p.xyz);
+}
+
+
+vec3 triIntersection(in vec3 ro, in vec3 rd, in vec3 v0, in vec3 v1, in vec3 v2) {
+	vec3 v1v0 = v1 - v0;
+	vec3 v2v0 = v2 - v0;
+	vec3 rov0 = ro - v0;
+	vec3 n = cross(v1v0, v2v0);
+	vec3 q = cross(rov0, rd);
+	float d = 1.0 / dot(rd, n);
+	float u = d * dot(-q, v2v0);
+	float v = d * dot(q, v1v0);
+	float t = d * dot(-n, rov0);
+	if (u < 0.0 || u > 1.0 || v < 0.0 || (u + v) > 1.0) {
+		t = -1.0;
+	}
+	return vec3(t, u, v);
 }
 
 vec3 getSky(vec3 rd) {
@@ -142,10 +162,11 @@ vec4 castRay(inout vec3 ro, inout vec3 rd) {
 	vec2 minIt = vec2(MAX_DIST);
 	vec2 it;
 	vec3 n;
+
 	mat2x4 spheres[10];
-	spheres[0][0] = vec4(-1.2, -1, -1.2, 0.2);
-	spheres[1][0] = vec4(-1.2, -0.5, -1.2, 0.2);
-	spheres[2][0] = vec4(-1.2, 0, -1.2, 0.2);
+	spheres[0][0] = vec4(-1.1, 0.2, -0.6, 0.09);
+	//spheres[1][0] = vec4(-0.9, 0, -1.1, 0.03);
+/*	spheres[2][0] = vec4(-1.2, 0, -1.2, 0.2);
 	spheres[3][0] = vec4(-1.2, 0.5, -1.2, 0.2);
 	spheres[4][0] = vec4(-1.2, 1, -1.2, 0.2);
 	
@@ -153,20 +174,20 @@ vec4 castRay(inout vec3 ro, inout vec3 rd) {
 	spheres[6][0] = vec4(-0.7, -0.5, -1.2, 0.2);
 	spheres[7][0] = vec4(-0.7, 0, -1.2, 0.2);
 	spheres[8][0] = vec4(-0.7, 0.5, -1.2, 0.2);
-	spheres[9][0] = vec4(-0.7, 1, -1.2, 0.2);
+	spheres[9][0] = vec4(-0.7, 1, -1.2, 0.2);*/
 	
 	//207, 160, 19 оранжевый
 	
-	spheres[0][1] = vec4(0.1, 0.1, 0.1, 0.1);
-	spheres[1][1] = vec4(0.1, 0.1, 0.1, 0.2);
-	spheres[2][1] = vec4(0.1, 0.1, 0.1, 0.3);
+	spheres[0][1] = vec4(fromRGB(255, 106, 0), -1);
+	//spheres[1][1] = vec4(fromRGB(207, 160, 19), -1.9);
+/*	spheres[2][1] = vec4(0.1, 0.1, 0.1, 0.3);
     spheres[3][1] = vec4(0.1, 0.1, 0.1, 0.4);
 	spheres[4][1] = vec4(0.1, 0.1, 0.1, 0.5);
 	spheres[5][1] = vec4(0.1, 0.1, 0.1, 0.6);
 	spheres[6][1] = vec4(0.1, 0.1, 0.1, 0.7);
 	spheres[7][1] = vec4(0.1, 0.1, 0.1, 0.8);
 	spheres[8][1] = vec4(0.1, 0.1, 0.1, 0.9);
-	spheres[9][1] = vec4(0.1, 0.1, 0.1, 1);
+	spheres[9][1] = vec4(0.1, 0.1, 0.1, 1);*/
 	
 	for(int i = 0; i < spheres.length(); i++) {
 		it = sphIntersect(ro - spheres[i][0].xyz, rd, spheres[i][0].w);
@@ -178,23 +199,45 @@ vec4 castRay(inout vec3 ro, inout vec3 rd) {
 		}
 	}
 		
-	vec3 boxesPos[2];
-	vec3 boxesSize[2];
-	vec4 boxesColor[2];
-	bool useTexture[2];
+	vec3 boxesPos[7];
+	vec3 boxesSize[7];
+	vec4 boxesColor[7];
+	bool useTexture[7];
 	
 	// light
-	boxesPos[0] = vec3(-1, 0, -3.3);
-	boxesSize[0] = vec3(0.5);
+	boxesPos[0] = vec3(-1.01, 0.59, -0.8);
+	boxesSize[0] = vec3(0.05, 0.1, 0.05);
 	boxesColor[0] = vec4(1, 0.5, 0.5, -2);
     useTexture[0] = false;
 
     boxesPos[1] = vec3(-1, 0, 0);
-    boxesSize[1] = vec3(1, 2, 1);
+    boxesSize[1] = vec3(0.5, 0.5, 0.5);
 //    boxesColor[1] = vec4(fromRGB(255, 147, 5), 0);
     boxesColor[1] = vec4(1, 1, 1, 0);
-	useTexture[1] = true;
+	useTexture[1] = false;
 	
+	boxesPos[2] = vec3(-1, 0, -1.5);
+	boxesSize[2] = vec3(0.5, 0.5, 0.001);
+	boxesColor[2] = vec4(1, 1, 1, 0);
+	useTexture[2] = false;
+	
+	boxesPos[3] = vec3(-1.5, 0, -1);
+    boxesSize[3] = vec3(0.001, 0.5, 0.5);
+    boxesColor[3] = vec4(1, 1, 1, 0);	
+	
+	boxesPos[4] = vec3(-0.5, 0, -1);
+    boxesSize[4] = vec3(0.001, 0.5, 0.5);
+    boxesColor[4] = vec4(1, 1, 1, 0);	
+    
+    boxesPos[5] = vec3(-1, -0.5, -1);
+    boxesSize[5] = vec3(0.5, 0.001, 0.5);
+    boxesColor[5] = vec4(fromRGB(19, 60, 173), 0);	
+    
+    boxesPos[6] = vec3(-1, 0.5, -1);
+    boxesSize[6] = vec3(0.5, 0.001, 0.5);
+    boxesColor[6] = vec4(1, 1, 1, 0);	
+    
+    
 	for (int i = 0; i < boxesPos.length(); i++) {      		
         vec3 boxN;
         it = boxIntersection(ro - boxesPos[i], rd, boxesSize[i], boxN);
@@ -210,23 +253,27 @@ vec4 castRay(inout vec3 ro, inout vec3 rd) {
             }
         }
     }	
-	
+	/*
 	mat2x4[6] planes;
-	planes[0][0] = vec4(0, 0, -1, 0);
+	planes[0][0] = vec4(0, 0, 1, 1);
 	planes[1][0] = vec4(1, 0, 0, 2);
 	planes[2][0] = vec4(-1, 0, 0, 0);
-	planes[3][0] = vec4(0, 0, 1, 3);
-	planes[4][0] = vec4(0, 1, 0, 2);
-	planes[5][0] = vec4(0, -1, 0, 2);
+    planes[3][0] = vec4(0, 0, 1, 1);
+	planes[4][0] = vec4(0, 1, 0, 0.5);
+	planes[5][0] = vec4(0, -1, 0, 0.5);
 	
 	// 119, 15, 148 фиолетовый
 	// 19, 60, 173 синий
 	planes[0][1] = vec4(1, 1, 1, 0);
-	planes[1][1] = vec4(fromRGB(230, 10, 10), 0);
-	planes[2][1] = vec4(fromRGB(10, 10, 230), 0);
+		
+	planes[1][1] = vec4(1, 1, 1, 0);
+	planes[2][1] = vec4(1, 1, 1, 0);
+	
+//	planes[1][1] = vec4(fromRGB(230, 10, 10), 1);
+//	planes[2][1] = vec4(fromRGB(10, 10, 230), 1);
 	planes[3][1] = vec4(1, 1, 1, 0);
-	planes[4][1] = vec4(1, 1, 1, 0);
-	planes[5][1] = vec4(1, 1, 1, 0);
+	planes[4][1] = vec4(1, 0, 0, 0);
+	planes[5][1] = vec4(0, 1, 0, 0);
 	
 	for (int i = 0; i < planes.length(); i++){
         vec4 planeNormal = planes[i][0];
@@ -236,17 +283,15 @@ vec4 castRay(inout vec3 ro, inout vec3 rd) {
             n = planeNormal.xyz;
             col = planes[i][1];
         }
-	}
+	}*/
 	if(minIt.x == MAX_DIST)
 	 return vec4(getSky(rd), -2.0);
 	 
 	if(col.a == -2.0)
 	 return col;
 	 
-	vec3 reflected = reflect(rd, normalize(n));
-	
+	vec3 reflected = reflect(rd, n);
 	if(col.a < 0.0) {
-	    rd = reflected;
 		float fresnel = 1.0 - abs(dot(-rd, n));
 		if(random() - 0.1 < fresnel * fresnel) {
 			rd = reflected;
@@ -256,7 +301,6 @@ vec4 castRay(inout vec3 ro, inout vec3 rd) {
 		rd = refract(rd, n, 1.0 / (1.0 - col.a));
 		return col;
 	}
-	
 	vec3 itPos = ro + rd * it.x;
 	vec3 r = randomOnSphere();
 	vec3 diffuse = normalize(r * dot(r, n));
@@ -276,24 +320,6 @@ vec3 traceRay(vec3 ro, vec3 rd) {
 	return vec3(0.0);
 }
 
-vec3 GetRayDirection(vec2 texcoord, vec2 viewportSize, float fov, vec3 direction, vec3 up)
-{
-    vec2 texDiff = 0.5 * vec2(1.0 - 2.0 * texcoord.x, 2.0 * texcoord.y - 1.0);
-    vec2 angleDiff = texDiff * vec2(viewportSize.x / viewportSize.y, 1.0) * tan(fov * 0.5);
-
-    vec3 rayDirection = normalize(vec3(angleDiff, 1.0f));
-
-    vec3 right = normalize(cross(up, direction));
-    mat3 viewToWorld = mat3(
-        right,
-        up,
-        direction
-    );
-
-    return viewToWorld * rayDirection;
-}
-
-
 void main() {
 	vec2 uv = (gl_TexCoord[0].xy - 0.5) * u_resolution / u_resolution.y;
 	vec2 uvRes = hash22(uv + 1.0) * u_resolution + u_resolution;
@@ -306,7 +332,7 @@ void main() {
 	rayDirection.zx *= rot(-u_mouse.y);
 	rayDirection.xy *= rot(u_mouse.x);
 	vec3 col = vec3(0.0);
-	int samples = 4;
+	int samples = 16;
 	for(int i = 0; i < samples; i++) {
 		col += traceRay(rayOrigin, rayDirection);
 	}
