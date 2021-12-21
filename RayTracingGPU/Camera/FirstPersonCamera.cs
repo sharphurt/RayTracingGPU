@@ -10,7 +10,7 @@ namespace RayTracingGPU.Camera
 
         private Vector2f _angle;
 
-        public float MoveSpeed { get; } = 0.1f;
+        public float MoveSpeed { get; } = 0.5f;
 
         private const float MouseSensitivity = 0.1f;
 

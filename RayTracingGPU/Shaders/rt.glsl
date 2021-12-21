@@ -51,7 +51,7 @@ uniform float uSamplePart;
 
 #define MAX_DEPTH 8
 #define SPHERE_COUNT 3
-#define BOX_COUNT 9
+#define BOX_COUNT 6
 #define N_IN 0.99
 #define N_OUT 1.0
 
@@ -60,117 +60,105 @@ vec3 light = normalize(vec3(-0.5, 0.75, -1.0));
 Sphere spheres[SPHERE_COUNT];
 Box boxes[BOX_COUNT];
 
+vec3 fromRGB(float r, float g, float b) {
+    return vec3(r, g, b) / 255.0;
+}
+
 void InitializeScene()
 {
-    spheres[0].position = vec3(2.5, 1.5, -1.5);
-    spheres[1].position = vec3(-2.5, 2.5, -1.0);
-    spheres[2].position = vec3(0.5, -4.0, 3.0);
+    spheres[0].position = vec3(-7, -1.5, 0);
     spheres[0].radius = 1.5;
-    spheres[1].radius = 1.0;
-    spheres[2].radius = 1.0;
-    spheres[0].material.roughness = 1.0;
-    spheres[1].material.roughness = 0.8;
-    spheres[2].material.roughness = 1.0;
+    spheres[0].material.roughness = -1;
     spheres[0].material.opacity = 0.0;
-    spheres[1].material.opacity = 0.0;
-    spheres[2].material.opacity = 0.8;
-    spheres[0].material.reflectance = vec3(1.0, 0.0, 0.0);
-    spheres[1].material.reflectance = vec3(1.0, 0.4, 0.0);
-    spheres[2].material.reflectance = vec3(1.0, 1.0, 1.0);
+    spheres[0].material.reflectance = vec3(fromRGB(207, 54, 245));
     spheres[0].material.emmitance = vec3(0.0);
+
+    spheres[1].position = vec3(-2.5, 2.5, -1.0);
+    spheres[1].radius = 1.0;
+    spheres[1].material.roughness = 0.8;
+    spheres[1].material.opacity = 0.0;
+    spheres[1].material.reflectance = vec3(1.0, 0.4, 0.0);
     spheres[1].material.emmitance = vec3(0.0);
+
+    spheres[2].position = vec3(0.5, -4.0, 3.0);
+    spheres[2].radius = 1.0;
+    spheres[2].material.roughness = 1.0;
+    spheres[2].material.opacity = 0.8;
+    spheres[2].material.reflectance = vec3(1.0, 1.0, 1.0);
     spheres[2].material.emmitance = vec3(0.0);
 
     // up
-    boxes[0].material.roughness = 0.0;
+    boxes[0].material.roughness = 10;
     boxes[0].material.emmitance = vec3(0.0);
     boxes[0].material.reflectance = vec3(1.0, 1.0, 1.0);
-    boxes[0].halfSize = vec3(5.0, 0.5, 5.0);
-    boxes[0].position = vec3(0.0, 5.5, 0.0);
+    boxes[0].material.opacity = 0.0;
+    boxes[0].halfSize = vec3(10, 0.5, 10);
+    boxes[0].position = vec3(0.0, -4, 0.0);
     boxes[0].rotation = mat3(
         1.0, 0.0, 0.0,
         0.0, 1.0, 0.0,
         0.0, 0.0, 1.0
     );
 
-    // down
-    boxes[1].material.roughness = 0.3;
-    boxes[1].material.opacity = 0.0;
-    boxes[1].material.emmitance = vec3(0.0);
+    boxes[1].material.roughness = -0.5;
+    boxes[1].material.emmitance = vec3(0.4);
     boxes[1].material.reflectance = vec3(1.0, 1.0, 1.0);
-    boxes[1].halfSize = vec3(5.0, 0.5, 5.0);
-    boxes[1].position = vec3(0.0, -5.5, 0.0);
+    boxes[1].material.opacity = 0.0;
+    boxes[1].halfSize = vec3(10, 0.5, 10);
+    boxes[1].position = vec3(0.0, 5, 0.0);
     boxes[1].rotation = mat3(
         1.0, 0.0, 0.0,
         0.0, 1.0, 0.0,
         0.0, 0.0, 1.0
     );
-
-    // right
-    boxes[2].material.roughness = 0.0;
-    boxes[2].material.opacity = 0.0;
+    
+    boxes[2].material.roughness = -0.5;
     boxes[2].material.emmitance = vec3(0.0);
-    boxes[2].material.reflectance = vec3(0.0, 1.0, 0.0);
-    boxes[2].halfSize = vec3(5.0, 0.5, 5.0);
-    boxes[2].position = vec3(5.5, 0.0, 0.0);
+    boxes[2].material.reflectance = vec3(1.0, 1.0, 1.0);
+    boxes[2].material.opacity = 0.0;
+    boxes[2].halfSize = vec3(10, 10, 0.5);
+    boxes[2].position = vec3(0.0, 0, -10);
     boxes[2].rotation = mat3(
-        0.0, 1.0, 0.0,
-        -1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0
-    );
-
-    // left
-    boxes[3].material.roughness = 0.0;
-    boxes[3].material.opacity = 0.0;
-    boxes[3].material.emmitance = vec3(0.0);
-    boxes[3].material.reflectance = vec3(1.0, 0.0, 0.0);
-    boxes[3].halfSize = vec3(5.0, 0.5, 5.0);
-    boxes[3].position = vec3(-5.5, 0.0, 0.0);
-    boxes[3].rotation = mat3(
-        0.0, 1.0, 0.0,
-        -1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0
-    );
-
-    // back
-    boxes[4].material.roughness = 0.0;
-    boxes[4].material.opacity = 0.0;
-    boxes[4].material.emmitance = vec3(0.0);
-    boxes[4].material.reflectance = vec3(1.0, 1.0, 1.0);
-    boxes[4].halfSize = vec3(5.0, 0.5, 5.0);
-    boxes[4].position = vec3(0.0, 0.0, -5.5);
-    boxes[4].rotation = mat3(
         1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0,
-        0.0, 1.0, 0.0
+        0.0, 1.0, 0.0,
+        0.0, 0.0, 1.0
     );
     
-        // front
-    boxes[8].material.roughness = 0.0;
-    boxes[8].material.opacity = 0.0;
-    boxes[8].material.emmitance = vec3(0.0);
-    boxes[8].material.reflectance = vec3(1.0, 1.0, 1.0);
-    boxes[8].halfSize = vec3(5.0, 0.5, 5.0);
-    boxes[8].position = vec3(0.0, 0.0, -5.5);
-    boxes[8].rotation = mat3(
+    
+    boxes[3].material.roughness = 0.0;
+    boxes[3].material.emmitance = vec3(0.0);
+    boxes[3].material.reflectance = vec3(1.0, 1.0, 1.0);
+    boxes[3].halfSize = vec3(10, 10, 0.5);
+    boxes[3].material.opacity = 0.0;
+    boxes[3].position = vec3(0, 0, 10);
+    boxes[3].rotation = mat3(
         1.0, 0.0, 0.0,
-        0.0, 0.0, 1.0,
-        0.0, 1.0, 0.0
+        0.0, 1.0, 0.0,
+        0.0, 0.0, 1.0
+    );
+    
+    boxes[4].material.roughness = 0.0;
+    boxes[4].material.emmitance = vec3(0.0);
+    boxes[4].material.reflectance = vec3(1.0, 1.0, 1.0);
+    boxes[4].halfSize = vec3(0.5, 10, 10);
+    boxes[4].position = vec3(10, 0, 0);
+    boxes[4].rotation = mat3(
+        1.0, 0.0, 0.0,
+        0.0, 1.0, 0.0,
+        0.0, 0.0, 1.0
     );
 
-    // light source
     boxes[5].material.roughness = 0.0;
-    boxes[5].material.opacity = 0.0;
-    boxes[5].material.emmitance = vec3(6.0);
-    boxes[5].material.reflectance = vec3(1.0);
-    boxes[5].halfSize = vec3(2.5, 0.2, 2.5);
-    boxes[5].position = vec3(0.0, 4.8, 0.0);
+    boxes[5].material.emmitance = vec3(0.0);
+    boxes[5].material.reflectance = vec3(1.0, 1.0, 1.0);
+    boxes[5].halfSize = vec3(0.5, 10, 10);
+    boxes[5].position = vec3(-10, 0, 0);
     boxes[5].rotation = mat3(
         1.0, 0.0, 0.0,
         0.0, 1.0, 0.0,
         0.0, 0.0, 1.0
     );
-
+/*
     // boxes
     boxes[6].material.roughness = 0.0;
     boxes[6].material.opacity = 0.0;
@@ -195,6 +183,20 @@ void InitializeScene()
         0.0, 1.0, 0.0,
         -0.7, 0.0, 0.7
     );
+    
+    */
+     // light source
+/*    boxes[6].material.roughness = 0.0;
+    boxes[6].material.opacity = 0.0;
+    boxes[6].material.emmitance = vec3(6.0);
+    boxes[6].material.reflectance = vec3(1.0);
+    boxes[6].halfSize = vec3(1, 0.2, 1);
+    boxes[6].position = vec3(0.0, 4.5, 0.0);
+    boxes[6].rotation = mat3(
+        1.0, 0.0, 0.0,
+        0.0, 1.0, 0.0,
+        0.0, 0.0, 1.0
+    );*/
 }
 
 
@@ -392,11 +394,11 @@ bool CastRay(vec3 rayOrigin, vec3 rayDirection, out float fraction, out vec3 nor
 
 
 vec3 getSky(vec3 rd) {
-	vec3 col = vec3(78.0 / 255.0, 141.0 / 255.0, 242.0 / 255.0);
+	vec3 col = vec3(163 / 255.0, 197 / 255.0, 1);
 	vec3 sun = vec3(0.95, 0.9, 1.0);
 	sun *= max(0.0, pow(dot(rd, light), 256.0));
 	col *= max(0.0, dot(light, vec3(0.0, 0.0, -1.0)));
-	return clamp(sun + col * 0.1, 0, 1.0);
+	return clamp(sun + col * 0.5, 0, 1.0);
 }
 
 bool IsRefracted(float rand, vec3 direction, vec3 normal, float opacity, float nIn, float nOut)
