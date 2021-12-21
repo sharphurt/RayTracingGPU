@@ -78,3 +78,4 @@ C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Release\netcore
 C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\obj\Release\netcoreapp3.1\RayTracingGPU.genruntimeconfig.cache
 C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\bin\Release\netcoreapp3.1\Assets\Fonts\gilroy-regular.ttf
 C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\bin\Release\netcoreapp3.1\Assets\Textures\chess.png
+C:\Users\sharphurt\RiderProjects\RayTracingGPU\RayTracingGPU\bin\Release\netcoreapp3.1\Shaders\rt.glsl

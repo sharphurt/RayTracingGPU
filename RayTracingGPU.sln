@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayTracingGPU", "RayTracingGPU\RayTracingGPU.csproj", "{2D4DDC70-020B-4BD2-80D3-809946BAA502}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayMarching", "RayMarching\RayMarching.csproj", "{D5A0A59D-5935-48FC-8159-01B845F98676}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{2D4DDC70-020B-4BD2-80D3-809946BAA502}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D4DDC70-020B-4BD2-80D3-809946BAA502}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D4DDC70-020B-4BD2-80D3-809946BAA502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A0A59D-5935-48FC-8159-01B845F98676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A0A59D-5935-48FC-8159-01B845F98676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A0A59D-5935-48FC-8159-01B845F98676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A0A59D-5935-48FC-8159-01B845F98676}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

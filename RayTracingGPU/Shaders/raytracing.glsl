@@ -37,12 +37,6 @@ vec2 hash22(vec2 p)
 	return fract((p3.xx+p3.yz)*p3.zy);
 }
 
-float atan2(vec2 dir)
-{
-    float angle = asin(dir.x) > 0 ? acos(dir.y) : -acos(dir.y);
-    return angle;
-}
-
 float random()
 {
 	R_STATE.x = TausStep(R_STATE.x, 13, 19, 12, uint(4294967294));
@@ -50,6 +44,12 @@ float random()
 	R_STATE.z = TausStep(R_STATE.z, 3, 11, 17, uint(4294967280));
 	R_STATE.w = LCGStep(R_STATE.w, uint(1664525), uint(1013904223));
 	return 2.3283064365387e-10 * float((R_STATE.x ^ R_STATE.y ^ R_STATE.z ^ R_STATE.w));
+}
+
+float atan2(vec2 dir)
+{
+    float angle = asin(dir.x) > 0 ? acos(dir.y) : -acos(dir.y);
+    return angle;
 }
 
 vec3 randomOnSphere() {
