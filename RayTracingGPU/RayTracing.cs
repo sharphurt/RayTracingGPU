@@ -31,7 +31,8 @@ namespace RayTracingGPU
 
         private RenderWindow _window;
 
-        private Texture _texture;
+        private Texture _chessTexture;
+        private Texture _marbleTexture;
 
         private RenderTexture _outputTexture;
         private Sprite _outputTextureSprite;
@@ -68,9 +69,14 @@ namespace RayTracingGPU
             _outputTextureSprite = new Sprite(_outputTexture.Texture);
             _outputTextureSpriteFlipped = CreateFlipped(_outputTextureSprite);
 
-            using (var image = new Image("Assets/Textures/chess.png"))
+            using (var image = new Image("Assets/Textures/chess1.jpg"))
             {
-                _texture = new Texture(image);
+                _chessTexture = new Texture(image);
+            }
+            
+            using (var image = new Image("Assets/Textures/marble.jpg"))
+            {
+                _marbleTexture = new Texture(image);
             }
 
             _clock = new Clock();
@@ -204,7 +210,8 @@ namespace RayTracingGPU
                     _shader.SetUniform("u_up", _camera.Up);
                     _shader.SetUniform("u_mouse", _mousePosition * MouseSensivity);
                     _shader.SetUniform("u_sample_part", 1.0f / _accumulatedFrames);
-                    _shader.SetUniform("u_chess_texture", _texture);
+                    _shader.SetUniform("u_chess_texture", _chessTexture);
+                    _shader.SetUniform("u_marble_texture", _marbleTexture);
                     var r1 = _random.NextDouble();
                     var r2 = _random.NextDouble();
                     _shader.SetUniform("u_seed1", new Vector2f((float) r1, (float) r1 + 999));

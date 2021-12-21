@@ -6,7 +6,7 @@ namespace RayTracingGPU
     {
         public static void Main(string[] args)
         {
-            var raytracing = new RayTracing(new Size(1920, 1080));
+            var raytracing = new RayTracing(new Size(1280, 720));
             raytracing.Run();
         }
     }

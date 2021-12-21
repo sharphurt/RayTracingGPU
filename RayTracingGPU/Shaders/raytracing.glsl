@@ -11,9 +11,10 @@ uniform vec2 u_seed1;
 uniform vec2 u_seed2;
 
 uniform sampler2D u_chess_texture;
+uniform sampler2D u_marble_texture;
 
 const float MAX_DIST = 99999.0;
-const int MAX_REF = 16;
+const int MAX_REF = 8;
 vec3 light = normalize(vec3(-0.5, 0.75, -1.0));
 
 uvec4 R_STATE;
@@ -164,30 +165,29 @@ vec4 castRay(inout vec3 ro, inout vec3 rd) {
 	vec3 n;
 
 	mat2x4 spheres[10];
-	spheres[0][0] = vec4(-1.1, 0.2, -0.6, 0.09);
-	//spheres[1][0] = vec4(-0.9, 0, -1.1, 0.03);
-/*	spheres[2][0] = vec4(-1.2, 0, -1.2, 0.2);
-	spheres[3][0] = vec4(-1.2, 0.5, -1.2, 0.2);
-	spheres[4][0] = vec4(-1.2, 1, -1.2, 0.2);
+	spheres[0][0] = vec4(-2, -0.35, -1.48, 0.18);
+	spheres[1][0] = vec4(-1.55, -0.3, -1.062, 0.02);
+	spheres[2][0] = vec4(-1.45, -0.35, -1.062, 0.02);
+	spheres[3][0] = vec4(-1.5, -0.23, -1.062, 0.02);
+	spheres[4][0] = vec4(-1.44, -0.2, -1.062, 0.02);
+	spheres[5][0] = vec4(-1.56, -0.5, -1.062, 0.02);
+	spheres[6][0] = vec4(-1.64, -0.45, -1.062, 0.02);
+	spheres[7][0] = vec4(-1.5, -0.39, -1.062, 0.02);
+	spheres[8][0] = vec4(-1.67, -0.28, -1.062, 0.02);
+	spheres[9][0] = vec4(-1.53, -0.35, -1.062, 0.02);
+
 	
-	spheres[5][0] = vec4(-0.7, -1, -1.2, 0.2);
-	spheres[6][0] = vec4(-0.7, -0.5, -1.2, 0.2);
-	spheres[7][0] = vec4(-0.7, 0, -1.2, 0.2);
-	spheres[8][0] = vec4(-0.7, 0.5, -1.2, 0.2);
-	spheres[9][0] = vec4(-0.7, 1, -1.2, 0.2);*/
-	
-	//207, 160, 19 оранжевый
-	
-	spheres[0][1] = vec4(fromRGB(255, 106, 0), -1);
-	//spheres[1][1] = vec4(fromRGB(207, 160, 19), -1.9);
-/*	spheres[2][1] = vec4(0.1, 0.1, 0.1, 0.3);
-    spheres[3][1] = vec4(0.1, 0.1, 0.1, 0.4);
-	spheres[4][1] = vec4(0.1, 0.1, 0.1, 0.5);
-	spheres[5][1] = vec4(0.1, 0.1, 0.1, 0.6);
-	spheres[6][1] = vec4(0.1, 0.1, 0.1, 0.7);
-	spheres[7][1] = vec4(0.1, 0.1, 0.1, 0.8);
-	spheres[8][1] = vec4(0.1, 0.1, 0.1, 0.9);
-	spheres[9][1] = vec4(0.1, 0.1, 0.1, 1);*/
+	spheres[0][1] = vec4(fromRGB(232, 16, 48), -0.5);
+	spheres[1][1] = vec4(fromRGB(83, 165, 252), -0.8);
+	spheres[2][1] = vec4(fromRGB(30, 227, 30), -0.8);
+	spheres[3][1] = vec4(fromRGB(19, 29, 138), -0.8);
+	spheres[4][1] = vec4(fromRGB(173, 21, 143), -0.8);
+	spheres[5][1] = vec4(fromRGB(255, 206, 8), -0.8);
+	spheres[6][1] = vec4(fromRGB(255, 37, 8), -0.8);
+	spheres[7][1] = vec4(fromRGB(8, 255, 33), -0.8);
+	spheres[8][1] = vec4(fromRGB(110, 30, 38), -0.8);
+	spheres[9][1] = vec4(fromRGB(83, 165, 252), -0.8);
+
 	
 	for(int i = 0; i < spheres.length(); i++) {
 		it = sphIntersect(ro - spheres[i][0].xyz, rd, spheres[i][0].w);
@@ -199,43 +199,46 @@ vec4 castRay(inout vec3 ro, inout vec3 rd) {
 		}
 	}
 		
-	vec3 boxesPos[7];
-	vec3 boxesSize[7];
-	vec4 boxesColor[7];
-	bool useTexture[7];
+	vec3 boxesPos[9];
+	vec3 boxesSize[9];
+	vec4 boxesColor[9];
+	int useTexture[9];
 	
-	// light
-	boxesPos[0] = vec3(-1.01, 0.59, -0.8);
-	boxesSize[0] = vec3(0.05, 0.1, 0.05);
-	boxesColor[0] = vec4(1, 0.5, 0.5, -2);
-    useTexture[0] = false;
+	boxesPos[0] = vec3(-2, -0.35, -3);
+	boxesSize[0] = vec3(0.25, 0.25, 0.2);
+	boxesColor[0] = vec4(1, 1, 1, -2);
 
-    boxesPos[1] = vec3(-1, 0, 0);
-    boxesSize[1] = vec3(0.5, 0.5, 0.5);
-//    boxesColor[1] = vec4(fromRGB(255, 147, 5), 0);
+    boxesPos[1] = vec3(-2, 0, -1);
+    boxesSize[1] = vec3(1, 1, 0.001);
     boxesColor[1] = vec4(1, 1, 1, 0);
-	useTexture[1] = false;
 	
-	boxesPos[2] = vec3(-1, 0, -1.5);
-	boxesSize[2] = vec3(0.5, 0.5, 0.001);
+	boxesPos[2] = vec3(-2, 0, -3);
+	boxesSize[2] = vec3(1, 1, 0.001);
 	boxesColor[2] = vec4(1, 1, 1, 0);
-	useTexture[2] = false;
 	
-	boxesPos[3] = vec3(-1.5, 0, -1);
-    boxesSize[3] = vec3(0.001, 0.5, 0.5);
-    boxesColor[3] = vec4(1, 1, 1, 0);	
+	boxesPos[3] = vec3(-2.5, 0, -2);
+    boxesSize[3] = vec3(0.001, 1, 1);
+    boxesColor[3] = vec4(fromRGB(17, 59, 186), 0);	
 	
-	boxesPos[4] = vec3(-0.5, 0, -1);
-    boxesSize[4] = vec3(0.001, 0.5, 0.5);
-    boxesColor[4] = vec4(1, 1, 1, 0);	
+	boxesPos[4] = vec3(-1, 0, -2);
+    boxesSize[4] = vec3(0.001, 1, 1);
+    boxesColor[4] = vec4(fromRGB(232, 138, 16), 0);	
     
-    boxesPos[5] = vec3(-1, -0.5, -1);
-    boxesSize[5] = vec3(0.5, 0.001, 0.5);
-    boxesColor[5] = vec4(fromRGB(19, 60, 173), 0);	
+    boxesPos[5] = vec3(-2, -1, -2);
+    boxesSize[5] = vec3(1, 0.001, 1);
+    boxesColor[5] = vec4(fromRGB(255, 255, 255), 0);	
     
-    boxesPos[6] = vec3(-1, 0.5, -1);
-    boxesSize[6] = vec3(0.5, 0.001, 0.5);
-    boxesColor[6] = vec4(1, 1, 1, 0);	
+    boxesPos[6] = vec3(-2, 0.7, -2);
+    boxesSize[6] = vec3(1, 0.001, 1);
+    boxesColor[6] = vec4(fromRGB(255, 255, 255), 0);	
+    
+    boxesPos[7] = vec3(-1.53, -0.35, -0.96);
+    boxesSize[7] = vec3(0.2, 0.2, 0.08);
+    boxesColor[7] = vec4(0.8, 0.8, 0.8, 0);
+    
+    boxesPos[8] = vec3(-2, -0.35, -0.8);
+    boxesSize[8] = vec3(0.15, 0.15, 0.5);
+    boxesColor[8] = vec4(0.8, 0.8, 0.8, 1);
     
     
 	for (int i = 0; i < boxesPos.length(); i++) {      		
@@ -244,10 +247,14 @@ vec4 castRay(inout vec3 ro, inout vec3 rd) {
         if(it.x > 0.0 && it.x < minIt.x) {
             minIt = it;
             n = boxN;
-            if (useTexture[i] == true){
+            if (useTexture[i] == 1) {
                 vec3 itPos = ro + rd * it.x;
             	vec2 uv = mapTexture(itPos, n, boxesPos[i], 3);
 			    col = vec4(texture(u_chess_texture, uv).rgb, boxesColor[i].w);
+			} else if (useTexture[i] == 2) {
+                vec3 itPos = ro + rd * it.x;
+            	vec2 uv = mapTexture(itPos, n, boxesPos[i], 3);
+			    col = vec4(texture(u_marble_texture, uv).rgb, boxesColor[i].w);   
             } else {
                  col = boxesColor[i]; 
             }
@@ -332,7 +339,7 @@ void main() {
 	rayDirection.zx *= rot(-u_mouse.y);
 	rayDirection.xy *= rot(u_mouse.x);
 	vec3 col = vec3(0.0);
-	int samples = 16;
+	int samples = 8;
 	for(int i = 0; i < samples; i++) {
 		col += traceRay(rayOrigin, rayDirection);
 	}
